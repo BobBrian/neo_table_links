@@ -2,13 +2,30 @@
 
 <h1>Restaurants</h1>
 
-<div id="restaurants">
-  <% @restaurants.each do |restaurant| %>
-    <%= render restaurant %>
-    <p>
-      <%= link_to "Show this restaurant", restaurant %>
-    </p>
-  <% end %>
-</div>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Restaurant Name</th>
+          <th>Address</th>
+          <th>Email</th>
+          <th>Contact Number</th>
+          <th>Details</th>
+          <!-- Add more table headers as needed -->
+        </tr>
+      </thead>
+      <tbody>
+        <% @restaurants.each do |restaurant| %>
+          <tr>
+            <td><%= restaurant.restaurant_name %></td>
+            <td><%= restaurant.address %></td>
+            <td><%= restaurant.email %></td>
+            <td><%= restaurant.contact_number %></td>
+            <td> <%= link_to "Show", restaurant %> </td>
+            <!-- Add more table cells for additional restaurant details -->
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<%= link_to "New restaurant", new_restaurant_path %>

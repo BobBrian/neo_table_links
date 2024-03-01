@@ -1,10 +1,15 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: %i[ show edit update destroy ]
   before_action :authorize_owner, only: [:new, :create]
+  before_action :authorize_admin, only: :index
 
   # GET /restaurants or /restaurants.json
   def index
     @restaurants = Restaurant.all
+    unless current_user && current_user.role == "Admin"
+      flash[:alert] = "You are not authorized to access this page."
+      redirect_to root_path
+    end
   end
 
   # GET /restaurants/1 or /restaurants/1.json

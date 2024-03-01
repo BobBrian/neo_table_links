@@ -17,5 +17,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authorize_admin
+    unless current_user && current_user.role == "Admin"
+      flash[:alert] = "You are not authorized to access this page."
+      redirect_to root_path
+    end
+  end
+
 
 end

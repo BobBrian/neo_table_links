@@ -1,17 +1,34 @@
 <!-- app/views/restaurants/my_restaurants.html.erb -->
 <h1>My Restaurants</h1>
 
-<% if user_signed_in? %>
-  <% if @restaurants.any? %>
-    <ul>
-      <% @restaurants.each do |restaurant| %>
-        <li><%= restaurant.restaurant_name %></li>
-        <!-- Display other restaurant details as needed -->
-      <% end %>
-    </ul>
-  <% else %>
-    <p>No restaurants found.</p>
-  <% end %>
-  <% else %>
-    <p>You Cannot View this Page since you do not have Authorization.</p>
+<% if @restaurants.any? %>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Restaurant Name</th>
+          <th>Address</th>
+          <th>Email</th>
+          <th>Contact Number</th>
+          <th>Details</th>
+          <!-- Add more table headers as needed -->
+        </tr>
+      </thead>
+      <tbody>
+        <% @restaurants.each do |restaurant| %>
+          <tr>
+            <td><%= restaurant.restaurant_name %></td>
+            <td><%= restaurant.address %></td>
+            <td><%= restaurant.email %></td>
+            <td><%= restaurant.contact_number %></td>
+            <td> <%= link_to "Show", restaurant %> </td>
+            <!-- Add more table cells for additional restaurant details -->
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p>No restaurants found.</p>
 <% end %>
+
