@@ -1,6 +1,6 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: %i[ show edit update destroy ]
-  before_action :authorize_owner, only: [:new]
+  before_action :authorize_owner, only: [:new, :create]
 
   # GET /restaurants or /restaurants.json
   def index
@@ -22,8 +22,8 @@ class RestaurantsController < ApplicationController
 
   # POST /restaurants or /restaurants.json
   def create
-    @restaurant = Restaurant.new(restaurant_params)
-
+    @restaurant = current_user.restaurants.build(restaurant_params)
+    
     respond_to do |format|
       if @restaurant.save
         format.html { redirect_to restaurant_url(@restaurant), notice: "Restaurant was successfully created." }
@@ -56,6 +56,10 @@ class RestaurantsController < ApplicationController
       format.html { redirect_to restaurants_url, notice: "Restaurant was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def my_restaurants
+    @restaurants = current_user.restaurants if current_user.role == "Owner"
   end
 
   private

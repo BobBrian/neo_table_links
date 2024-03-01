@@ -1,0 +1,17 @@
+<!-- app/views/restaurants/my_restaurants.html.erb -->
+<h1>My Restaurants</h1>
+
+<% if user_signed_in? %>
+  <% if @restaurants.any? %>
+    <ul>
+      <% @restaurants.each do |restaurant| %>
+        <li><%= restaurant.restaurant_name %></li>
+        <!-- Display other restaurant details as needed -->
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No restaurants found.</p>
+  <% end %>
+  <% else %>
+    <p>You Cannot View this Page since you do not have Authorization.</p>
+<% end %>
