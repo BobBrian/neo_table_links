@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reservation_name: MyString
+  reservation_date: 2024-03-01 08:01:59
+  is_active: false
+
+two:
+  reservation_name: MyString
+  reservation_date: 2024-03-01 08:01:59
+  is_active: false

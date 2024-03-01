@@ -1,21 +1,38 @@
-<h1>TableLinks#index</h1>
-<p>Find me in app/views/table_links/index.html.erb</p>
+<h1>TableLinks Home Page</h1>
 
-<% if current_user %>
+<% if user_signed_in? %>
   <p> Hello Welcome to the website that can teach you about user roles</p>
   <p> Hello <%= current_user.username %></p>
    <p>Your Email is <%= current_user.email %></p>
   <p>Did you Know on our System you are a <%= current_user.role %></p>
   <p> You have successfully logged in</p>
   <br/>
-   <%= link_to 'Sign Out', destroy_user_session_path, class: 'nav-link', data: { turbo_method: :delete } %>
+
+  <% if current_user.role == 'Admin' %>
+    <p>As the Admin of this Site you have various fucntions you can access</p>
+    <p>You can view all Users</p>
+    <p>You can view all Restaurants</p>
+    <p>You can view all Reservations</p>
+    <% elsif current_user.role == 'Owner' %>
+    <p>As an Owner of this Site you have various fucntions you can access</p>
+    <p>You can create a Restaurant (and its associated tables)/p>
+    <p>You can view all Restaurants (that you have created)</p>
+    <p>You can view all Reservations (that your Restaurants have had)</p>
+    <% elsif current_user.role == 'Customer' %>
+    <p>As a Customer of this Site you have various fucntions you can access</p>
+    <p>You can create a Reservations</p>
+    <p>You can view all Reservations (that you have made)</p>
+    <% else %>
+    <p>Seems you are an Unkown User</p>
+  <% end%>
+
+  <%= link_to 'Sign Out', destroy_user_session_path, class: 'nav-link text-danger', data: { turbo_method: :delete } %>
 <%else%>
- <p>You are not Signed In </p>
- 
+ <p>You are not Signed In therfore you cannot see any information  beyond this point </p>
   <%= link_to "Sign-Up", new_user_registration_path%>
   <br/>
   <%= link_to "Sign-In", new_user_session_path%>
-  
-
 <% end %>
 
+<%# rails generate devise User username:string role:integer %>
+<%#  %>
