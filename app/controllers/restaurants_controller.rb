@@ -1,5 +1,6 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: %i[ show edit update destroy ]
+  before_action :authorize_owner, only: [:new]
 
   # GET /restaurants or /restaurants.json
   def index
@@ -66,5 +67,12 @@ class RestaurantsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def restaurant_params
       params.require(:restaurant).permit(:restaurant_name, :address, :email, :contact_number)
+    end
+
+    def authorize_owner
+      unless current_user && current_user.role == "Owner"
+        flash[:alert] = "You are not authorized to access this page."
+        redirect_to root_path
+      end
     end
 end

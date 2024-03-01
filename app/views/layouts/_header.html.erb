@@ -18,8 +18,41 @@
           <li class="nav-item">
             <%= link_to 'Sign Out', destroy_user_session_path, class: 'nav-link text-danger', data: { turbo_method: :delete } %>
           </li>
+          <% if current_user.role == 'Admin' %>
+            <li class="nav-item">
+              <%# Link to View All Users %>
+            </li>
+            <li class="nav-item">
+              <%# Link to View All Restaurants %>
+            </li>
+            <li class="nav-item">
+              <%# Link to View All Reservations %>
+            </li>
+            <% elsif current_user.role == 'Owner' %>
+              <li class="nav-item">
+                <%= link_to "Create A Restaurant", new_restaurant_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%# Link to View All Restaurant that they have created %>
+              </li>
+              <li class="nav-item">
+                <%# Link to View All Reservations Associated with their Restaurants %>
+              </li>
+            <% elsif current_user.role == 'Customer' %>
+              <li class="nav-item">
+                <%# Link to Create a Reservation %>
+              </li>
+              <li class="nav-item">
+                <%# Link to View All fo your Reservations %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <p>Seems you are an Unkown User</p>
+              </li>
+          <% end %>
         <% end %>
       </ul>
     </div>
   </div>
 </nav>
+
