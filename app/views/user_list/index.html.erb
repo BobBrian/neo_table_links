@@ -1,0 +1,50 @@
+<h1>User List</h1>
+
+<h2>Customers</h2>
+<table>
+  <thead>
+    <tr>
+      <th>User ID</th>
+      <th>UserName</th>
+      <th>Email</th>
+      <th>Role</th>
+      
+      <!-- Add more table headers for other user attributes -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @customers.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <td><%= user.role %></td>
+        <!-- Add more table cells for other user attributes -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>Owners</h2>
+<table>
+  <thead>
+    <tr>
+      <th>User ID</th>
+      <th>UserName</th>
+      <th>Email</th>
+      <th>Role</th>
+      <!-- Add more table headers for other user attributes -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @owners.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <td><%= user.role %></td>
+        <!-- Add more table cells for other user attributes -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>

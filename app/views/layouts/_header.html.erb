@@ -17,7 +17,7 @@
 
           <% if current_user.role == 'Admin' %>
             <li class="nav-item">
-              <%# Link to View All Users %>
+              <%= link_to "View All Users", userlists_path, class:"nav-link" %>
             </li>
             <li class="nav-item">
               <%= link_to "View All Restaurants", restaurants_path, class:"nav-link"%>
@@ -28,6 +28,7 @@
             <li class="nav-item">
               <%= link_to 'Sign Out', destroy_user_session_path, class: 'nav-link text-danger', data: { turbo_method: :delete } %>
             </li>
+
             <% elsif current_user.role == 'Owner' %>
               <li class="nav-item">
                 <%= link_to "Create A Restaurant", new_restaurant_path, class: "nav-link" %>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'user_list/index', to: 'userlists#index'
   root 'table_links#index'
   get 'table_links/about'
   resources :reservations

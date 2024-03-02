@@ -5,3 +5,5 @@ class TableLinksController < ApplicationController
   def about
   end
 end
+
+#rails generate controller UserList index

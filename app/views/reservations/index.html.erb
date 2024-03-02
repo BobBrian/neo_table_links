@@ -2,13 +2,29 @@
 
 <h1>Reservations</h1>
 
-<div id="reservations">
-  <% @reservations.each do |reservation| %>
-    <%= render reservation %>
-    <p>
-      <%= link_to "Show this reservation", reservation %>
-    </p>
-  <% end %>
-</div>
+<table>
+  <thead>
+    <tr>
+      <th>Reservation ID</th>
+      <th>User ID</th>
+      <th>Restaurant ID</th>
+      <th>Date and Time</th>
+      <th>Active</th>
+      <th>Show</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= reservation.ReservationID %></td>
+        <td><%= reservation.userID %></td>
+        <td><%= reservation.RestaurantID %></td>
+        <td><%= reservation.ReservationDateTime %></td>
+        <td><%= reservation.IsActive ? 'Yes' : 'No' %></td>
+        <td><%= link_to "Show", reservation %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to "New reservation", new_reservation_path %>
