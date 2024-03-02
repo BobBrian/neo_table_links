@@ -1,8 +1,7 @@
-<%= form_with(model: table) do |form| %>
+<%= form_with(model: [restaurant, table]) do |form| %>
   <% if table.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(table.errors.count, "error") %> prohibited this table from being saved:</h2>
-
       <ul>
         <% table.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,6 +10,7 @@
     </div>
   <% end %>
 
+  <!-- Other table fields here -->
   <div>
     <%= form.label :table_name, style: "display: block" %>
     <%= form.text_field :table_name %>
@@ -30,3 +30,4 @@
     <%= form.submit %>
   </div>
 <% end %>
+

@@ -15,18 +15,18 @@
             <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %>
           </li>
 
-          <li class="nav-item">
-            <%= link_to 'Sign Out', destroy_user_session_path, class: 'nav-link text-danger', data: { turbo_method: :delete } %>
-          </li>
           <% if current_user.role == 'Admin' %>
             <li class="nav-item">
               <%# Link to View All Users %>
             </li>
             <li class="nav-item">
-              <%# Link to View All Restaurants %>
+              <%= link_to "View All Restaurants", restaurants_path, class:"nav-link"%>
             </li>
             <li class="nav-item">
-              <%# Link to View All Reservations %>
+              <%= link_to "View All Reservations", reservations_path, class:"nav-link"%>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Sign Out', destroy_user_session_path, class: 'nav-link text-danger', data: { turbo_method: :delete } %>
             </li>
             <% elsif current_user.role == 'Owner' %>
               <li class="nav-item">
@@ -38,12 +38,18 @@
               <li class="nav-item">
                 <%# Link to View All Reservations Associated with their Restaurants %>
               </li>
+              <li class="nav-item">
+                <%= link_to 'Sign Out', destroy_user_session_path, class: 'nav-link text-danger', data: { turbo_method: :delete } %>
+            </li>
             <% elsif current_user.role == 'Customer' %>
               <li class="nav-item">
                 <%# Link to Create a Reservation %>
               </li>
               <li class="nav-item">
                 <%# Link to View All fo your Reservations %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Sign Out', destroy_user_session_path, class: 'nav-link text-danger', data: { turbo_method: :delete } %>
               </li>
             <% else %>
               <li class="nav-item">

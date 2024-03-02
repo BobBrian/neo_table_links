@@ -1,9 +1,8 @@
-<h1>New table</h1>
-
-<%= render "form", table: @table %>
-
+<h1>Add Table to <%= @restaurant.restaurant_name %></h1>
+<%# render "form", table: @table %>
+<%= render partial: 'form', locals: { restaurant: @restaurant, table: @table } %>
 <br>
-
 <div>
-  <%= link_to "Back to tables", tables_path %>
+  <%= link_to "Back to My Restaurants", my_restaurants_path %>
 </div>
+

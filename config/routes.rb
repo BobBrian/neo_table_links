@@ -3,9 +3,12 @@ Rails.application.routes.draw do
   get 'table_links/about'
   resources :reservations
 
-  resources :tables
+  # resources :tables
+  # resources :restaurants
 
-  resources :restaurants
+  resources :restaurants do
+    resources :tables, only: [:new, :create, :destroy]
+  end
   get 'my_restaurants', to: 'restaurants#my_restaurants'
   
   devise_for :users

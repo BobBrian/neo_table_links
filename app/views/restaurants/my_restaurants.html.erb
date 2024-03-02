@@ -11,6 +11,9 @@
           <th>Email</th>
           <th>Contact Number</th>
           <th>Details</th>
+          <th>Add Table</th>
+          <th>Delete Restaurant</th>
+          
           <!-- Add more table headers as needed -->
         </tr>
       </thead>
@@ -22,6 +25,9 @@
             <td><%= restaurant.email %></td>
             <td><%= restaurant.contact_number %></td>
             <td> <%= link_to "Show", restaurant %> </td>
+            <td><%= link_to "Add Table", new_restaurant_table_path(restaurant), class: "btn btn-primary" %></td>
+            <td><%= button_to "Delete", @restaurant, form_method: :delete, data: { confirm: "Are you sure?" } %></td>
+
             <!-- Add more table cells for additional restaurant details -->
           </tr>
         <% end %>
