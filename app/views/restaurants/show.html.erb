@@ -2,42 +2,46 @@
 
 <%= render @restaurant %>
 
-<div>
-  
-  <%= link_to "Edit this restaurant", edit_restaurant_path(@restaurant) %> |
-  <%= link_to "My Restaurants", my_restaurants_path %>
+<% if current_user && current_user.role == 'Owner' %>
+  <div>
+    <%= link_to "Edit this restaurant", edit_restaurant_path(@restaurant) %> |
+    <%= link_to "My Restaurants", my_restaurants_path %>
+  </div>
+<% end %>
 
-</div>
+<% if current_user && current_user.role == 'Owner' %>
+  <!-- Display tables associated with the restaurant -->
+  <% if @restaurant.tables.any? %>
+    <h2>Associated Tables</h2>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Table Name</th>
+            <th>Number of Seats</th>
+            <th>Delete Restaurant</th>
+            <!-- Add more table headers if needed -->
+          </tr>
+        </thead>
+        <tbody>
+          <% @restaurant.tables.each do |table| %>
+            <tr>
+              <td><%= table.table_name %></td>
+              <td><%= table.seat_number %></td>
+              <td><%= button_to "Delete", restaurant_table_path(@restaurant, table), method: :delete, data: { confirm: "Are you sure?" } %></td>
+
+              <!-- Add more table cells for additional attributes -->
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  
+  <% else %>
+    <p>No tables found for this restaurant.</p>
+  <% end %>
+
+<% end %>
 
 <br/>
 
-<!-- Display tables associated with the restaurant -->
-<% if @restaurant.tables.any? %>
-  <h2>Associated Tables</h2>
-  <div class="table-responsive">
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th>Table Name</th>
-          <th>Number of Seats</th>
-          <th>Delete Restaurant</th>
-          <!-- Add more table headers if needed -->
-        </tr>
-      </thead>
-      <tbody>
-        <% @restaurant.tables.each do |table| %>
-          <tr>
-            <td><%= table.table_name %></td>
-            <td><%= table.seat_number %></td>
-            <td><%= button_to "Delete", restaurant_table_path(@restaurant, table), method: :delete, data: { confirm: "Are you sure?" } %></td>
-
-            <!-- Add more table cells for additional attributes -->
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
- 
-<% else %>
-  <p>No tables found for this restaurant.</p>
-<% end %>

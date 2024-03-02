@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   #Normal Routes
-  get 'user_list/index', to: 'userlists#index'
+  get 'user_list/index', to: 'user_list#index'
   root 'table_links#index'
   get 'table_links/about'
 

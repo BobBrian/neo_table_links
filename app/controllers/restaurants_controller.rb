@@ -1,6 +1,6 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: %i[ show edit update destroy ]
-  before_action :authorize_owner, only: [:new, :create]
+  before_action :authorize_owner, only: [:new, :create ,:edit, :update, :my_restaurants]
   before_action :authorize_admin, only: :index
 
   # GET /restaurants or /restaurants.json

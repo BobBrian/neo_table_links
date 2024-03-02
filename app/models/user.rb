@@ -7,7 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   enum role: [:Customer, :Owner, :Admin]
 
-  has_many :restaurants
-  has_many :reservations
+  has_many :restaurants, dependent: :destroy
+  has_many :reservations, dependent: :destroy
   
 end

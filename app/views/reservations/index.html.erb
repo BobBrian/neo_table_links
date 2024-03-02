@@ -2,29 +2,45 @@
 
 <h1>Reservations</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Reservation ID</th>
-      <th>User ID</th>
-      <th>Restaurant ID</th>
-      <th>Date and Time</th>
-      <th>Active</th>
-      <th>Show</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @reservations.each do |reservation| %>
-      <tr>
-        <td><%= reservation.ReservationID %></td>
-        <td><%= reservation.userID %></td>
-        <td><%= reservation.RestaurantID %></td>
-        <td><%= reservation.ReservationDateTime %></td>
-        <td><%= reservation.IsActive ? 'Yes' : 'No' %></td>
-        <td><%= link_to "Show", reservation %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if current_user && current_user.role == 'Customer' %>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Reservation Name</th>
+          <th>Restaurant</th>
+          <th>Address</th>
+          <th>Date and Time</th>
+          <th>Table</th>
+          <th>Active</th>
+          <th>Show</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @reservations.each do |reservation| %>
+          <tr>
+            <td><%= reservation.reservation_name %></td>
+            <td><%= reservation.restaurant.restaurant_name %></td>
+            <td><%= reservation.restaurant.address %></td>
+            <td><%= reservation.reservation_date.strftime("%Y-%m-%d %H:%M:%S") %></td>
+            <td><%= reservation.table.table_name %></td>
+            <td><%= reservation.is_active ? 'Yes' : 'No' %></td>
+            <td><%= link_to "Show", reservation %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p>No  Reservations Found</p>
+<% end %>
 
-<%= link_to "New reservation", new_reservation_path %>
+<% if current_user && current_user.role == 'Customer' %>
+  <div>
+    <%= link_to "New reservation", new_reservation_path %>
+  </div>
+<% end %>
+
+
+
+
