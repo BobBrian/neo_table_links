@@ -1,5 +1,7 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :authorize_customer, only: [:new, :create]
 
   # GET /reservations or /reservations.json
   def index
@@ -21,7 +23,7 @@ class ReservationsController < ApplicationController
 
   # POST /reservations or /reservations.json
   def create
-    @reservation = Reservation.new(reservation_params)
+    @reservation = current_user.reservations.new(reservation_params)
 
     respond_to do |format|
       if @reservation.save
@@ -65,6 +67,13 @@ class ReservationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def reservation_params
-      params.require(:reservation).permit(:reservation_name, :reservation_date, :is_active)
+      params.require(:reservation).permit(:reservation_name, :reservation_date, :is_active:is_active, :user_id, :restaurant_id, :table_id)
+    end
+
+    def authorize_customer
+      unless current_user && current_user.role == "Customer"
+        flash[:alert] = "You are not authorized to access this page."
+        redirect_to root_path
+      end
     end
 end
