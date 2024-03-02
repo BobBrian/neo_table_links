@@ -20,7 +20,6 @@
         <tr>
           <th>Table Name</th>
           <th>Number of Seats</th>
-          <th>Is Available?</th>
           <th>Delete Restaurant</th>
           <!-- Add more table headers if needed -->
         </tr>
@@ -30,7 +29,6 @@
           <tr>
             <td><%= table.table_name %></td>
             <td><%= table.seat_number %></td>
-            <td><%= table.is_available? ? 'Yes' : 'No' %></td>
             <td><%= button_to "Delete", restaurant_table_path(@restaurant, table), method: :delete, data: { confirm: "Are you sure?" } %></td>
 
             <!-- Add more table cells for additional attributes -->
