@@ -17,7 +17,7 @@
 
           <% if current_user.role == 'Admin' %>
             <li class="nav-item">
-              <%= link_to "View All Users", user_list_index_path, class:"nav-link" %>
+              <%= link_to "View All Users", users_index_path, class:"nav-link" %>
             </li>
             <li class="nav-item">
               <%= link_to "View All Restaurants", restaurants_path, class:"nav-link"%>
@@ -44,10 +44,10 @@
             </li>
             <% elsif current_user.role == 'Customer' %>
               <li class="nav-item">
-                <%# Link to Create a Reservation %>
+                <%= link_to "New Reservation", new_reservation_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
-                <%# Link to View All fo your Reservations %>
+                <%= link_to "My Reservations", my_reservations_path, class: "nav-link"  %>
               </li>
               <li class="nav-item">
                 <%= link_to 'Sign Out', destroy_user_session_path, class: 'nav-link text-danger', data: { turbo_method: :delete } %>

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  get 'users/index'
   #Normal Routes
-  get 'user_list/index', to: 'user_list#index'
+  
   root 'table_links#index'
   get 'table_links/about'
 
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
   end
   
   get 'my_restaurants', to: 'restaurants#my_restaurants'
+  get 'my_reservations', to: 'reservations#my_reservations'
   
   #Devise Routes
   devise_for :users

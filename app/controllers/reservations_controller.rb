@@ -59,6 +59,10 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def my_reservations
+    @reservations = current_user.reservations if current_user.role == "Customer"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation

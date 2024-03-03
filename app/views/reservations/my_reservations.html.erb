@@ -1,0 +1,30 @@
+<h1>My Reservations</h1>
+
+<% if @reservations.any? %>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Reservation ID</th>
+          <th>Reservation Name</th>
+          <th>Restaurant</th>
+          <th>Date and Time</th>
+          <!-- Add more headers if needed -->
+        </tr>
+      </thead>
+      <tbody>
+        <% @reservations.each do |reservation| %>
+          <tr>
+            <td><%= reservation.id %></td>
+            <td><%= reservation.reservation_name %></td>
+            <td><%= reservation.restaurant.restaurant_name %></td>
+            <td><%= reservation.reservation_date %></td>
+            <!-- Add more cells for additional reservation details -->
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p>You Have not Made Any Reservations.</p>
+<% end %>
